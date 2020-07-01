@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block body %}
+
+  <div class="row">
+      {% if order_list %}
+      <div class="col-12">
+      <h1>Orders</h1>
+      </div>
+      {% for order in order_list %}
+      <div class="col-6">
+      <div class="container-fluid">
+        <div class="row">
+        <div class="col-12 mt-3">
+            <div class="card">
+                <div class="card-horizontal">
+                    <div class="img-square-wrapper">
+                        <img class="" src="/media/{{ order.product.product_image }}" alt="Card image cap" height="200px" width="200px">
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ order.order.id }}</h4>
+                        <h4 class="card-text">₹{{ order.product.product_cost }}<h4>
+                        {% if user.is_staff %}
+                          <a href="/orders/{{ order.id }}/" class="btn btn-primary">Update</a>
+                        {% endif %}
+
+                    </div>
+                </div>
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
+
+      {% endfor %}
+
+      {% else %}
+
+      <p>NO ITEMS FOUND</p>
+
+      {% endif %}
+
+</div>
+
+{% endblock %}
